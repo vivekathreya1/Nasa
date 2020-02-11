@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Space Pictures</string>
+    <string name="data_retrieval_error">Could not fetch data. Please try again</string>
+    <string name="no_internet">Please check your network try again later.</string>
+    <string name="retry">Retry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
