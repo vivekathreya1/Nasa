@@ -1,7 +1,6 @@
 package com.vivek.spacepictures.db;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -18,30 +17,34 @@ public abstract class PicsRoomDatabase extends RoomDatabase {
     private static final String TAG = "PicsRoomDatabase";
     private static PicsRoomDatabase instance;
     private static final String DATABASE_NAME = "nasaimages.db";
+
     public abstract PicsDao picsDao();
+
 
     public static PicsRoomDatabase getInstance(final Context context) {
         if (instance == null) {
             synchronized (PicsRoomDatabase.class) {
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context, PicsRoomDatabase.class, DATABASE_NAME)
-                            .addCallback(new Callback() {
-                                @Override
-                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                    super.onCreate(db);
-                                    new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            instance.picsDao().insertPics(GetData.getDataFromJson(context));
-                                        }
-                                    }).start();
 
-                                }
-                            })
-                            .fallbackToDestructiveMigration().build();
+                        instance = Room.databaseBuilder(context, PicsRoomDatabase.class, DATABASE_NAME)
+                                .addCallback(new Callback() {
+                                    @Override
+                                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                        super.onCreate(db);
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                instance.picsDao().insertPics(GetData.getDataFromJson(context));
+                                            }
+                                        }).start();
+
+                                    }
+                                })
+                                .fallbackToDestructiveMigration().build();
+                    }
                 }
             }
-        }
+//        }
         return instance;
 
     }

@@ -1,33 +1,33 @@
 package com.vivek.spacepictures.ui.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.Navigation;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vivek.spacepictures.R;
-import com.vivek.spacepictures.databinding.ImageRowBinding;
+import com.vivek.spacepictures.databinding.ImageDetailRowBinding;
 import com.vivek.spacepictures.model.Picture;
 
-public class ImagesAdapter extends PagedListAdapter<Picture, ImagesAdapter.ImagesViewHolder> {
+public class ImageDetailAdapter extends PagedListAdapter<Picture, ImageDetailAdapter.ImagesViewHolder> {
 
-    private static final String TAG = ImagesAdapter.class.getSimpleName();
+    private static final String TAG = ImageDetailAdapter.class.getSimpleName();
+    final Context context;
 
-    public ImagesAdapter(Context context) {
+    public ImageDetailAdapter(Context context) {
         super(DIFF_CALLBACK);
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public ImagesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ImageRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.image_row, parent, false);
+    public ImageDetailAdapter.ImagesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ImageDetailRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.image_detail_row, parent, false);
         return new ImagesViewHolder(binding);
     }
 
@@ -54,16 +54,11 @@ public class ImagesAdapter extends PagedListAdapter<Picture, ImagesAdapter.Image
     }
 
     public class ImagesViewHolder extends RecyclerView.ViewHolder {
-        ImageRowBinding binding;
+        ImageDetailRowBinding binding;
 
-        private ImagesViewHolder(ImageRowBinding binding) {
+        private ImagesViewHolder(ImageDetailRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.picsCard.setOnClickListener(view -> {
-                Bundle bundle = new Bundle();
-                bundle.putInt("clickedPos", this.getAdapterPosition());
-                Navigation.findNavController(view).navigate(R.id.imagesListToDetailFragment, bundle);
-            });
         }
 
         private void bind(Picture picture) {
@@ -72,4 +67,5 @@ public class ImagesAdapter extends PagedListAdapter<Picture, ImagesAdapter.Image
         }
 
     }
+
 }

@@ -9,8 +9,6 @@ import androidx.paging.PagedList;
 
 import com.vivek.spacepictures.model.Picture;
 
-import java.util.List;
-
 public class PicsRepository {
 
     private PicsDao picsDao;
@@ -30,4 +28,5 @@ public class PicsRepository {
         return new LivePagedListBuilder<>(factory, config)
                 .build();
     }
+
 }

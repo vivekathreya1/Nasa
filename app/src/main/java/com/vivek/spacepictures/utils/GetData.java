@@ -1,6 +1,5 @@
 package com.vivek.spacepictures.utils;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.google.gson.Gson;

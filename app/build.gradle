@@ -36,6 +36,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation group: 'com.google.android.material', name: 'material', version: '1.2.0-alpha04'
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.archLifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.archLifecycleVersion"

@@ -4,22 +4,29 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="picture"
+            type="com.vivek.spacepictures.model.Picture" />
+
         <variable
             name="viewHolder"
             type="com.vivek.spacepictures.ui.adapter.ImagesAdapter.ImagesViewHolder" />
     </data>
 
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/pics_card"
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_view_height"
+        android:layout_margin="5dp"
         android:elevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_marginStart="@dimen/card_view_margin"
             android:layout_marginTop="@dimen/card_view_margin"
             android:layout_marginEnd="@dimen/card_view_margin">
@@ -29,16 +36,18 @@
                 android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/pic_iv"
+                nasaImage="@{picture.url}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toTopOf="@+id/pic_title_tv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -52,14 +61,30 @@
                 android:layout_marginStart="@dimen/card_view_margin"
                 android:layout_marginTop="@dimen/card_view_margin"
                 android:layout_marginBottom="@dimen/card_view_margin"
-
+                android:text="@{picture.title}"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/card_view_title_size"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/pic_copyright"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pic_iv" />
+
+            <TextView
+                android:id="@+id/pic_copyright"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/card_view_margin"
+                android:layout_marginBottom="@dimen/card_view_margin"
+                android:text="@{@string/copyright(picture.copyright)}"
+                android:textColor="@color/colorGray"
+                android:visibility="@{picture.copyright == null ? View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pic_title_tv" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

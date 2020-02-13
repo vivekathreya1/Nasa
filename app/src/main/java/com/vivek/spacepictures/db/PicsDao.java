@@ -17,6 +17,9 @@ public interface PicsDao {
     @Query("SELECT * FROM pictureTable ORDER BY date DESC")
     DataSource.Factory<Integer, Picture> getPictures();
 
+    @Query("SELECT * FROM pictureTable WHERE copyright = :copyright")
+    Picture getPicture(String copyright);
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertPics(List<Picture> picture);

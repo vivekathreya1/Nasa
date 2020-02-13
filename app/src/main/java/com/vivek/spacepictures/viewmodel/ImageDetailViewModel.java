@@ -1,7 +1,6 @@
 package com.vivek.spacepictures.viewmodel;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -11,11 +10,7 @@ import com.vivek.spacepictures.db.PicsRepository;
 import com.vivek.spacepictures.model.Picture;
 import com.vivek.spacepictures.utils.Constants;
 
-public class SpaceImagesViewModel extends AndroidViewModel {
-    private static final String TAG = SpaceImagesViewModel.class.getSimpleName();
-
-    private LiveData<PagedList<Picture>> pictures;
-    private LiveData<PagedList<String>> pictureUrls;
+public class ImageDetailViewModel extends AndroidViewModel {
 
     private final static PagedList.Config config
             = new PagedList.Config.Builder()
@@ -25,11 +20,11 @@ public class SpaceImagesViewModel extends AndroidViewModel {
             .setEnablePlaceholders(true)
             .build();
     private PicsRepository picsRepository;
+    private LiveData<PagedList<Picture>> pictures;
 
-    public SpaceImagesViewModel(final Application application) {
+    public ImageDetailViewModel(final Application application) {
         super(application);
         picsRepository = new PicsRepository(application);
-        new GetDataTask().execute();
     }
 
     public LiveData<PagedList<Picture>> getPictures() {
@@ -37,14 +32,5 @@ public class SpaceImagesViewModel extends AndroidViewModel {
             pictures = picsRepository.getAllPics(config);
         }
         return pictures;
-    }
-
-
-    private class GetDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            picsRepository.getFirstId();
-            return null;
-        }
     }
 }

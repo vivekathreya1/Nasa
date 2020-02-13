@@ -3,20 +3,13 @@ package com.vivek.spacepictures.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 @Entity(tableName = "pictureTable")
-public class Picture implements Comparable<Picture> {
+public class Picture  {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
@@ -43,15 +36,7 @@ public class Picture implements Comparable<Picture> {
     @Expose
     private String hdurl;
 
-    @ColumnInfo(name = "media_type")
-    @SerializedName("media_type")
-    @Expose
-    private String mediaType;
 
-    @ColumnInfo(name = "service_version")
-    @SerializedName("service_version")
-    @Expose
-    private String serviceVersion;
 
     @ColumnInfo(name = "title")
     @SerializedName("title")
@@ -62,6 +47,14 @@ public class Picture implements Comparable<Picture> {
     @SerializedName("url")
     @Expose
     private String url;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCopyright() {
         return copyright;
@@ -95,22 +88,6 @@ public class Picture implements Comparable<Picture> {
         this.hdurl = hdurl;
     }
 
-    public String getMediaType() {
-        return mediaType;
-    }
-
-    public void setMediaType(String mediaType) {
-        this.mediaType = mediaType;
-    }
-
-    public String getServiceVersion() {
-        return serviceVersion;
-    }
-
-    public void setServiceVersion(String serviceVersion) {
-        this.serviceVersion = serviceVersion;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -127,54 +104,25 @@ public class Picture implements Comparable<Picture> {
         this.url = url;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "Picture{" +
-                "copyright='" + copyright + '\'' +
+                "id=" + id +
+                ", copyright='" + copyright + '\'' +
                 ", date='" + date + '\'' +
                 ", explanation='" + explanation + '\'' +
                 ", hdurl='" + hdurl + '\'' +
-                ", mediaType='" + mediaType + '\'' +
-                ", serviceVersion='" + serviceVersion + '\'' +
                 ", title='" + title + '\'' +
                 ", url='" + url + '\'' +
                 '}';
     }
 
-
-
-    @Override
-    public int compareTo(Picture picture) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = null;
-        try {
-            date1 = sdf.parse(date);
-            Date date2 = sdf.parse(picture.date);
-            Calendar cal1 = Calendar.getInstance();
-            Calendar cal2 = Calendar.getInstance();
-            cal1.setTime(date1);
-            cal2.setTime(date2);
-            if (cal1.after(cal2)) {
-                return -1;
-            } else if (cal1.before(cal2)) {
-                return 1;
-            } else if (cal1.equals(cal2)) {
-                return 0;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        return 0;
+    public Picture(String copyright, String date, String explanation, String hdurl, String title, String url) {
+        this.copyright = copyright;
+        this.date = date;
+        this.explanation = explanation;
+        this.hdurl = hdurl;
+        this.title = title;
+        this.url = url;
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="card_view_height">200dp</dimen>
+    <dimen name="card_view_height">250dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
     <dimen name="card_view_title_size">16sp</dimen>
 

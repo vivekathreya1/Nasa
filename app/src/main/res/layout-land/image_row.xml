@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        
+
+        <import type="android.view.View"/>
+
         <variable
             name="picture"
             type="com.vivek.spacepictures.model.Picture" />
@@ -13,10 +15,14 @@
             type="com.vivek.spacepictures.ui.adapter.ImagesAdapter.ImagesViewHolder" />
     </data>
 
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/pics_card"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_view_height">
+        android:layout_height="@dimen/card_view_height"
+        android:layout_margin="5dp"
+        android:elevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,6 +48,7 @@
                 android:layout_height="0dp"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toTopOf="@+id/pic_title_tv"
+                nasaImage="@{picture.url}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +61,10 @@
                 android:layout_marginStart="@dimen/card_view_margin"
                 android:layout_marginTop="@dimen/card_view_margin"
                 android:layout_marginBottom="@dimen/card_view_margin"
+                android:text="@{picture.title}"
                 android:textSize="@dimen/card_view_title_size"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
